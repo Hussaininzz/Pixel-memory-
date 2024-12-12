@@ -1,0 +1,33 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 20px;
+}
+
+#pixelGrid {
+  display: grid;
+  grid-template-columns: repeat(50, 10px); /* 50 columns */
+  grid-gap: 1px;
+  justify-content: center;
+  margin: 20px auto;
+  width: 500px; /* Adjust to fit grid size */
+  background-color: #000;
+}
+
+.pixel {
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pixel:hover {
+  background-color: #ddd;
+  }
