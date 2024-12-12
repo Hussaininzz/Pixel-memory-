@@ -5,41 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pixel Memory</title>
   <style>
-    /* Include your CSS styles here */
-    td {
-      width: 20px;
-      height: 20px;
-      border: 1px solid black;
-      background-size: cover;
-      background-repeat: no-repeat;
-      cursor: pointer;
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+      margin: 0;
+      background-color: #f0f0f0; /* Optional: Background color */
+    }
+
+    #siteTitle {
+      font-size: 3em; /* Adjust size */
+      color: #4CAF50; /* Optional: Title color */
+      text-align: center; /* Ensures proper alignment */
     }
   </style>
 </head>
 <body>
-  <h1>Pixel Memory</h1>
-  <p>Click on a square to upload an image!</p>
-  <table>
-    <!-- Generate the grid -->
-    <script>
-      const rows = 10; // Number of rows
-      const cols = 10; // Number of columns
-      document.write('<tbody>');
-      for (let i = 0; i < rows; i++) {
-        document.write('<tr>');
-        for (let j = 0; j < cols; j++) {
-          document.write('<td></td>');
-        }
-        document.write('</tr>');
-      }
-      document.write('</tbody>');
-    </script>
-  </table>
-
-  <!-- Link to the JavaScript file -->
-  <script src="script.js"></script>
+  <h1 id="siteTitle">Pixel Memory</h1>
 </body>
 </html>
-<div class="recipes-section">
-  <button id="recipesButton">Recipes</button>
-</div>
