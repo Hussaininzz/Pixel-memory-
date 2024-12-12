@@ -1,7 +1,7 @@
 td {
   width: 2000px;
   height: 2000px;
-  border: 100px solid black;
+  border: 1000px solid red;
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
