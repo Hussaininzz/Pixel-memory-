@@ -25,3 +25,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.querySelectorAll("td");
+
+  // Load saved data from localStorage
+  const savedData = JSON.parse(localStorage.getItem("gridColors")) || {};
+
+  // Apply saved colors to the grid
+  grid.forEach((cell, index) => {
+    if (savedData[index]) {
+      cell.style.backgroundColor = savedData[index];
+    }
+
+    // Add click event listener for customizing colors
+    cell.addEventListener("click", () => {
+      const color = prompt("Enter a color:");
+      if (color) {
+        cell.style.backgroundColor = color;
+        savedData[index] = color; // Save the color in the object
+        localStorage.setItem("gridColors", JSON.stringify(savedData)); // Update localStorage
+      }
+    });
+  });
+});
