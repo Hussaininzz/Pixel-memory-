@@ -1,8 +1,13 @@
 td {
   width: 10000px; /* Increase the width */
   height: 5000px; /* Increase the height */
-  border: 1px solid red; /* Keep the border for visibility */
+  border: 1000px solid red; /* Keep the border for visibility */
   background-size: cover;
   background-repeat: no-repeat;
   cursor: pointer;
+}
+.grid-container {
+  overflow: auto;
+  max-width: 100%; /* Restrict width to the screen */
+  max-height: 100%; /* Restrict height to the screen */
 }
