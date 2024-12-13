@@ -1,44 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const grid = document.querySelectorAll("td");
+const API_KEY = 'YOUR_YOUTUBE_API_KEY'; // Replace with your API key
+const BASE_URL = 'https://www.googleapis.com/youtube/v3/';
 
-  // Object to save pixel images
-  const savedImages = JSON.parse(localStorage.getItem("gridPixelImages")) || {};
+async function fetchVideos(categoryId) {
+  const response = await fetch(`${BASE_URL}videos?part=snippet&chart=mostPopular&regionCode=US&videoCategoryId=${categoryId}&maxResults=5&key=${API_KEY}`);
+  const data = await response.json();
+  return data.items; // Array of trending videos
+}
 
-  // Load saved images from localStorage
-  grid.forEach((cell, index) => {
-    if (savedImages[index]) {
-      cell.style.backgroundImage = `url('${savedImages[index]}')`;
-      cell.style.backgroundSize = "cover";
-    }
-
-    // Add event listener for click
-    cell.addEventListener("click", () => {
-      // Create file input dynamically
-      const fileInput = document.createElement("input");
-      fileInput.type = "file";
-      fileInput.accept = "image/*"; // Accept only image files
-
-      // Trigger file input click
-      fileInput.click();
-
-      // Handle file selection
-      fileInput.addEventListener("change", (event) => {
-        const file = event.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-
-          // When the file is read
-          reader.onload = (e) => {
-            const imageUrl = e.target.result;
-            cell.style.backgroundImage = `url('${imageUrl}')`;
-            cell.style.backgroundSize = "cover"; // Ensure the image fits the pixel
-            savedImages[index] = imageUrl; // Save the image URL
-            localStorage.setItem("gridPixelImages", JSON.stringify(savedImages)); // Update localStorage
-          };
-
-          reader.readAsDataURL(file); // Read the file as a data URL
-        }
-      });
-    });
+function displayVideos(videos, containerId) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = ''; // Clear existing content
+  videos.forEach(video => {
+    const videoElement = document.createElement('div');
+    videoElement.className = 'video-item';
+    videoElement.innerHTML = `
+      <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank">
+        <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
+      </a>
+      <h3>${video.snippet.title}</h3>
+    `;
+    container.appendChild(videoElement);
   });
-});
+}
+
+// Fetch videos for each section
+fetchVideos(10).then(videos => displayVideos(videos, 'music-videos')); // Music category
+fetchVideos(19).then(videos => displayVideos(videos, 'travel-videos')); // Travel category
+fetchVideos(20).then(videos => displayVideos(videos, 'gaming-videos')); // Gaming category
+fetchVideos(28).then(videos => displayVideos(videos, 'tech-videos')); // Technology category
