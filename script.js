@@ -1,30 +1,38 @@
-const API_KEY = 'YOUR_YOUTUBE_API_KEY'; // Replace with your API key
-const BASE_URL = 'https://www.googleapis.com/youtube/v3/';
+// Marco AI
+async function askMarco() {
+  const query = document.getElementById("ai-query").value;
+  const responseElement = document.getElementById("ai-response");
 
-async function fetchVideos(categoryId) {
-  const response = await fetch(`${BASE_URL}videos?part=snippet&chart=mostPopular&regionCode=US&videoCategoryId=${categoryId}&maxResults=5&key=${API_KEY}`);
-  const data = await response.json();
-  return data.items; // Array of trending videos
+  try {
+    const response = await fetch(`https://www.googleapis.com/language/translate/v2?key=AIzaSyBR54cP7bbVfxR6qSAH_2gZMwMuEpzYDk0&q=${query}`);
+    const data = await response.json();
+    const answer = data.data.translations[0].translatedText;
+    responseElement.textContent = `Marco says: ${answer}`;
+  } catch (error) {
+    responseElement.textContent = "Marco AI is currently unavailable. Please try again later.";
+    console.error(error);
+  }
 }
 
-function displayVideos(videos, containerId) {
-  const container = document.getElementById(containerId);
-  container.innerHTML = ''; // Clear existing content
-  videos.forEach(video => {
-    const videoElement = document.createElement('div');
-    videoElement.className = 'video-item';
+// Fetch Trending Videos
+async function fetchTrendingVideos() {
+  const apiKey = "AIzaSyBUEj5-yDaNmK4yoXTQ-UYhiOMN9pfcLWU"; // YouTube API key
+  const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=5&regionCode=US&key=${apiKey}`);
+  const data = await response.json();
+  const videoContainer = document.getElementById("trending-videos");
+
+  videoContainer.innerHTML = ""; // Clear existing content
+
+  data.items.forEach(video => {
+    const videoElement = document.createElement("div");
     videoElement.innerHTML = `
-      <a href="https://www.youtube.com/watch?v=${video.id}" target="_blank">
-        <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
-      </a>
       <h3>${video.snippet.title}</h3>
+      <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
+      <p>${video.snippet.description}</p>
     `;
-    container.appendChild(videoElement);
+    videoContainer.appendChild(videoElement);
   });
 }
 
-// Fetch videos for each section
-fetchVideos(10).then(videos => displayVideos(videos, 'music-videos')); // Music category
-fetchVideos(19).then(videos => displayVideos(videos, 'travel-videos')); // Travel category
-fetchVideos(20).then(videos => displayVideos(videos, 'gaming-videos')); // Gaming category
-fetchVideos(28).then(videos => displayVideos(videos, 'tech-videos')); // Technology category
+// Initialize Trending Videos
+fetchTrendingVideos();
