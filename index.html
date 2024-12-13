@@ -5,47 +5,152 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hussain Search Engine</title>
   <style>
+    /* Reset default margins */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body styling */
     body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      background-color: #f0f0f0;
     }
+
+    /* Title styling */
     #siteTitle {
-      font-size: 3em;
-      color: #4CAF50;
+      font-size: 3rem;
+      font-weight: bold;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
+
+    /* Search bar styling */
     #searchBar {
-      margin-top: 20px;
       display: flex;
+      margin-top: 20px;
+      position: relative;
+      animation: slideIn 1s ease-in-out;
     }
+
     input[type="text"] {
       width: 300px;
       padding: 10px;
       font-size: 1em;
-      border: 2px solid #4CAF50;
-      border-radius: 5px;
+      border: none;
+      border-radius: 50px;
       outline: none;
+      padding-left: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
+
     button {
-      padding: 10px 15px;
+      padding: 10px 20px;
       font-size: 1em;
       border: none;
-      background-color: #4CAF50;
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
       color: white;
       cursor: pointer;
-      border-radius: 5px;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      margin-left: 10px;
+      transition: transform 0.3s ease;
     }
+
     button:hover {
-      background-color: #45a049;
+      transform: scale(1.1);
     }
+
+    /* Results container */
     #results {
       margin-top: 20px;
       width: 80%;
       max-width: 800px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      overflow-y: auto;
+      max-height: 300px;
+      animation: fadeInUp 1s ease-in-out;
+    }
+
+    #results h2 {
+      color: #ff9;
+      margin-bottom: 15px;
+    }
+
+    #results a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1em;
+      display: block;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+
+    #results a:hover {
+      color: #ff416c;
+    }
+
+    /* Google search styling */
+    .gcse-search {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    /* Keyframe animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+      #siteTitle {
+        font-size: 2rem;
+      }
+
+      input[type="text"] {
+        width: 200px;
+      }
     }
   </style>
 </head>
@@ -77,7 +182,7 @@
       youtubeData.items.forEach(item => {
         const videoId = item.id.videoId;
         const title = item.snippet.title;
-        resultsDiv.innerHTML += `<p><a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">${title}</a></p>`;
+        resultsDiv.innerHTML += `<a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">${title}</a>`;
       });
     }
   </script>
