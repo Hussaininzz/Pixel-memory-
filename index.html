@@ -3,25 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hussain Web</title>
+  <title>Pixel Memory</title>
   <style>
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh; /* Full viewport height */
+      height: 100vh;
       margin: 0;
-      background-color: #f0f0f0; /* Optional: Background color */
+      background-color: #f0f0f0;
     }
-
     #siteTitle {
-      font-size: 3em; /* Adjust size */
-      color: #4CAF50; /* Optional: Title color */
-      text-align: center; /* Ensures proper alignment */
+      font-size: 3em;
+      color: #4CAF50;
+    }
+    #searchBar {
+      margin-top: 20px;
+      display: flex;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 1em;
+      border: 2px solid #4CAF50;
+      border-radius: 5px;
+      outline: none;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 1em;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    #results {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 800px;
     }
   </style>
 </head>
 <body>
-  <h1 id="siteTitle">Hussain Web</h1>
+  <h1 id="siteTitle">Pixel Memory</h1>
+  <div id="searchBar">
+    <input type="text" id="query" placeholder="Search YouTube or the Web">
+    <button onclick="search()">Search</button>
+  </div>
+  <div id="results"></div>
+
+  <!-- Google Custom Search Script -->
+  <script async src="https://cse.google.com/cse.js?cx=c70793c48eb2943bb"></script>
+  <div class="gcse-search"></div>
+
+  <script>
+    async function search() {
+      const query = document.getElementById('query').value;
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = '<p>Loading results...</p>';
+      
+      // Fetch YouTube results
+      const youtubeApiKey = 'AIzaSyBUEj5-yDaNmK4yoXTQ-UYhiOMN9pfcLWU';
+      const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${youtubeApiKey}&type=video&maxResults=5`);
+      const youtubeData = await youtubeResponse.json();
+      
+      // Display YouTube results
+      resultsDiv.innerHTML = '<h2>YouTube Results</h2>';
+      youtubeData.items.forEach(item => {
+        const videoId = item.id.videoId;
+        const title = item.snippet.title;
+        resultsDiv.innerHTML += `<p><a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">${title}</a></p>`;
+      });
+    }
+  </script>
 </body>
-</html>
+  </html>
