@@ -4,81 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hussain Search Engine</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: #4CAF50;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    .video-section {
-      margin: 20px auto;
-      max-width: 1200px;
-      padding: 20px;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .video-section h2 {
-      font-size: 24px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #4CAF50;
-      display: inline-block;
-      padding-bottom: 5px;
-    }
-    .video-item {
-      margin-bottom: 20px;
-      display: inline-block;
-      width: 300px;
-      vertical-align: top;
-      margin-right: 15px;
-    }
-    .video-item img {
-      width: 100%;
-      border-radius: 8px;
-    }
-    .video-item h3 {
-      font-size: 16px;
-      margin: 10px 0 0;
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Hussain Search Engine is your gateway to information and travel guides with Marco AI.">
+  <meta name="keywords" content="search engine, travel guide, Marco AI, Hussain Search, trending videos, professional website">
+  <meta name="author" content="Hussain">
 </head>
 <body>
-
-<header>
-  <h1>Hussain Search Engine</h1>
-</header>
-
-<!-- Sections for videos -->
-<div class="video-section">
-  <h2>Trending Music</h2>
-  <div id="music-videos"></div>
-</div>
-
-<div class="video-section">
-  <h2>Trending Travel</h2>
-  <div id="travel-videos"></div>
-</div>
-
-<div class="video-section">
-  <h2>Trending Gaming</h2>
-  <div id="gaming-videos"></div>
-</div>
-
-<div class="video-section">
-  <h2>Trending Technology</h2>
-  <div id="tech-videos"></div>
-</div>
-
-<!-- Add more sections as needed -->
-
-<script src="script.js"></script>
-
+  <header>
+    <h1>Hussain Search Engine</h1>
+    <p>Your gateway to knowledge and discovery.</p>
+  </header>
+  <main>
+    <section class="search-section">
+      <input type="text" id="search" placeholder="What are you looking for?">
+      <button onclick="search()">Search</button>
+    </section>
+    
+    <section id="marco-ai">
+      <h2>Ask Marco AI</h2>
+      <input type="text" id="ai-query" placeholder="Ask me anything about travel">
+      <button onclick="askMarco()">Ask Marco</button>
+      <p id="ai-response"></p>
+    </section>
+    
+    <section id="trending">
+      <h2>Trending Now</h2>
+      <div id="trending-videos"></div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2024 Hussain Search Engine. All rights reserved.</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
-</html>
+  </html>
