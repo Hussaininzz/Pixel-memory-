@@ -1,4 +1,4 @@
-// Marco AI
+// Marco AI Guider
 async function askMarco() {
   const query = document.getElementById("ai-query").value;
   const responseElement = document.getElementById("ai-response");
