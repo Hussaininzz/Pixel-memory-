@@ -1,44 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hussain Search Engine</title>
-  <link rel="stylesheet" href="styles.css">
-  <meta name="description" content="Hussain Search Engine is your gateway to information, travel guides, and trending contents.">
-  <meta name="keywords" content="search engine, travel, AI, trending videos, Hussain Search">
-  <meta name="author" content="Hussain">
-  <script async src="https://cse.google.com/cse.js?cx=c70793c48eb2943bb"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Web</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #ffffff;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            color: #666;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        .search-container input[type="text"] {
+            width: 70%;
+            max-width: 600px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+        }
+        .search-container button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4caf50;
+            color: white;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+        .search-container button:hover {
+            background-color: #45a049;
+        }
+        .trending {
+            padding: 20px;
+        }
+        .trending h2 {
+            margin-top: 0;
+            font-size: 1.8em;
+            color: #444;
+        }
+        .post {
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .post img {
+            max-width: 100%;
+            border-radius: 5px;
+        }
+        .post h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .post p {
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ffffff;
+            color: #666;
+            box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+        }
+        /* Infinite scroll loader */
+        .loader {
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Hussain Search Engine</h1>
-    <p>Your gateway to knowledge and discovery.</p>
-  </header>
+    <header>
+        <h1>White Web</h1>
+        <p>Your gateway to knowledge and discovery.</p>
+    </header>
 
-  <main>
-    <section class="search-section">
-      <input type="text" id="search" placeholder="Search here...">
-      <button onclick="document.querySelector('.gcse-search').scrollIntoView();">Search</button>
-      <div class="gcse-search"></div>
-    </section>
+    <div class="search-container">
+        <input type="text" placeholder="Search here...">
+        <button>Search</button>
+    </div>
 
-    <section id="marco-ai">
-      <h2>Ask Marco AI</h2>
-      <input type="text" id="ai-query" placeholder="Ask me anything about travel">
-      <button onclick="askMarco()">Ask Marco</button>
-      <p id="ai-response"></p>
-    </section>
+    <div class="trending">
+        <h2>Trending Now</h2>
+        <div id="posts-container">
+            <div class="post">
+                <h3>Hey.. long time no see</h3>
+                <img src="https://via.placeholder.com/600x300" alt="Sample Post">
+                <p>This is a sample post content...</p>
+            </div>
+        </div>
+        <div class="loader" id="loader">
+            Loading more posts...
+        </div>
+    </div>
 
-    <section id="trending">
-      <h2>Trending Now</h2>
-      <div id="trending-videos"></div>
-    </section>
-  </main>
+    <footer>
+        <p>&copy; 2024 White Web. All rights reserved.</p>
+    </footer>
 
-  <footer>
-    <p>&copy; 2024 Hussain Search Engine. All rights reserved.</p>
-  </footer>
-  <script src="script.js"></script>
+    <script>
+        // Infinite Scroll
+        let postsContainer = document.getElementById('posts-container');
+        let loader = document.getElementById('loader');
+
+        let page = 1;
+
+        function loadMorePosts() {
+            setTimeout(() => {
+                for (let i = 0; i < 3; i++) {
+                    let post = document.createElement('div');
+                    post.className = 'post';
+                    post.innerHTML = `
+                        <h3>Sample Post ${page * 3 + i + 1}</h3>
+                        <img src="https://via.placeholder.com/600x300" alt="Sample Post">
+                        <p>This is dynamically loaded post content...</p>
+                    `;
+                    postsContainer.appendChild(post);
+                }
+                page++;
+                loader.style.display = 'none';
+            }, 1000);
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+                loader.style.display = 'block';
+                loadMorePosts();
+            }
+        });
+    </script>
 </body>
-</html>
+      </html>
