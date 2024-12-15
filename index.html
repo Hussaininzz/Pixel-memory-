@@ -21,25 +21,28 @@
         }
         header h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 2em;
         }
         header p {
             margin: 5px 0 0;
-            font-size: 1.2em;
+            font-size: 1em;
             color: #666;
         }
         .search-container {
             display: flex;
             justify-content: center;
+            align-items: center;
             padding: 20px;
+            flex-wrap: wrap;
         }
         .search-container input[type="text"] {
-            width: 70%;
-            max-width: 600px;
+            width: 100%;
+            max-width: 500px;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px 0 0 5px;
             font-size: 1em;
+            margin-bottom: 10px;
         }
         .search-container button {
             padding: 10px 20px;
@@ -49,6 +52,7 @@
             font-size: 1em;
             cursor: pointer;
             border-radius: 0 5px 5px 0;
+            margin-bottom: 10px;
         }
         .search-container button:hover {
             background-color: #45a049;
@@ -58,27 +62,34 @@
         }
         .trending h2 {
             margin-top: 0;
-            font-size: 1.8em;
+            font-size: 1.5em;
             color: #444;
+            text-align: center;
         }
         .post {
             background-color: #ffffff;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
             box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .post img {
             max-width: 100%;
             border-radius: 5px;
+            margin-bottom: 10px;
         }
         .post h3 {
             margin: 10px 0;
-            font-size: 1.5em;
+            font-size: 1.2em;
+            text-align: center;
             color: #333;
         }
         .post p {
             color: #555;
+            text-align: center;
         }
         footer {
             text-align: center;
@@ -92,6 +103,27 @@
             text-align: center;
             margin: 20px 0;
         }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            header p {
+                font-size: 1em;
+            }
+            .search-container input[type="text"] {
+                max-width: 100%;
+                margin-bottom: 5px;
+            }
+            .search-container button {
+                width: 100%;
+                border-radius: 5px;
+            }
+            .post {
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -101,16 +133,17 @@
     </header>
 
     <div class="search-container">
-        <input type="text" placeholder="Search here...">
-        <button>Search</button>
+        <input type="text" placeholder="Search here..." id="search-box">
+        <button onclick="search()">Search</button>
     </div>
 
     <div class="trending">
         <h2>Trending Now</h2>
         <div id="posts-container">
+            <!-- Sample Post -->
             <div class="post">
+                <img src="https://via.placeholder.com/600x300" alt="Sample Thumbnail">
                 <h3>Hey.. long time no see</h3>
-                <img src="https://via.placeholder.com/600x300" alt="Sample Post">
                 <p>This is a sample post content...</p>
             </div>
         </div>
@@ -124,21 +157,21 @@
     </footer>
 
     <script>
-        // Infinite Scroll
-        let postsContainer = document.getElementById('posts-container');
-        let loader = document.getElementById('loader');
+        // Infinite Scroll Logic
+        const postsContainer = document.getElementById('posts-container');
+        const loader = document.getElementById('loader');
 
         let page = 1;
 
         function loadMorePosts() {
             setTimeout(() => {
                 for (let i = 0; i < 3; i++) {
-                    let post = document.createElement('div');
+                    const post = document.createElement('div');
                     post.className = 'post';
                     post.innerHTML = `
-                        <h3>Sample Post ${page * 3 + i + 1}</h3>
-                        <img src="https://via.placeholder.com/600x300" alt="Sample Post">
-                        <p>This is dynamically loaded post content...</p>
+                        <img src="https://via.placeholder.com/600x300" alt="Dynamic Thumbnail">
+                        <h3>Dynamic Post ${page * 3 + i + 1}</h3>
+                        <p>This is dynamically loaded content for the post...</p>
                     `;
                     postsContainer.appendChild(post);
                 }
@@ -153,6 +186,12 @@
                 loadMorePosts();
             }
         });
+
+        // Placeholder search function
+        function search() {
+            const query = document.getElementById('search-box').value;
+            alert(`Search for: ${query}`);
+        }
     </script>
 </body>
-      </html>
+        </html>
