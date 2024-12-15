@@ -103,7 +103,6 @@
             text-align: center;
             margin: 20px 0;
         }
-
         /* Mobile Styles */
         @media (max-width: 768px) {
             header h1 {
@@ -140,16 +139,9 @@
     <div class="trending">
         <h2>Trending Now</h2>
         <div id="posts-container">
-            <!-- Sample Post -->
-            <div class="post">
-                <img src="https://via.placeholder.com/600x300" alt="Sample Thumbnail">
-                <h3>Hey.. long time no see</h3>
-                <p>This is a sample post content...</p>
-            </div>
+            <!-- Posts will be dynamically loaded here -->
         </div>
-        <div class="loader" id="loader">
-            Loading more posts...
-        </div>
+        <div class="loader" id="loader" style="display: none;">Loading more posts...</div>
     </div>
 
     <footer>
@@ -157,41 +149,68 @@
     </footer>
 
     <script>
-        // Infinite Scroll Logic
+        const API_KEY = 'YOUR_API_KEY_HERE'; // Replace with your actual API key
+        const BASE_URL = 'https://example.com/api'; // Replace with your API base URL
         const postsContainer = document.getElementById('posts-container');
         const loader = document.getElementById('loader');
 
-        let page = 1;
-
-        function loadMorePosts() {
-            setTimeout(() => {
-                for (let i = 0; i < 3; i++) {
-                    const post = document.createElement('div');
-                    post.className = 'post';
-                    post.innerHTML = `
-                        <img src="https://via.placeholder.com/600x300" alt="Dynamic Thumbnail">
-                        <h3>Dynamic Post ${page * 3 + i + 1}</h3>
-                        <p>This is dynamically loaded content for the post...</p>
-                    `;
-                    postsContainer.appendChild(post);
-                }
-                page++;
-                loader.style.display = 'none';
-            }, 1000);
-        }
-
-        window.addEventListener('scroll', () => {
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        // Function to fetch trending posts
+        async function fetchTrendingPosts() {
+            try {
                 loader.style.display = 'block';
-                loadMorePosts();
-            }
-        });
+                const response = await fetch(`${BASE_URL}/trending?api_key=${API_KEY}`);
+                const data = await response.json();
 
-        // Placeholder search function
-        function search() {
-            const query = document.getElementById('search-box').value;
-            alert(`Search for: ${query}`);
+                data.posts.forEach(post => {
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post';
+                    postElement.innerHTML = `
+                        <img src="${post.thumbnail}" alt="${post.title}">
+                        <h3>${post.title}</h3>
+                        <p>${post.description}</p>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+
+                loader.style.display = 'none';
+            } catch (error) {
+                console.error('Error fetching trending posts:', error);
+            }
         }
+
+        // Function to handle search
+        async function search() {
+            const query = document.getElementById('search-box').value.trim();
+            if (!query) {
+                alert('Please enter a search term.');
+                return;
+            }
+
+            try {
+                postsContainer.innerHTML = '';
+                loader.style.display = 'block';
+                const response = await fetch(`${BASE_URL}/search?query=${query}&api_key=${API_KEY}`);
+                const data = await response.json();
+
+                data.results.forEach(result => {
+                    const postElement = document.createElement('div');
+                    postElement.className = 'post';
+                    postElement.innerHTML = `
+                        <img src="${result.thumbnail}" alt="${result.title}">
+                        <h3>${result.title}</h3>
+                        <p>${result.description}</p>
+                    `;
+                    postsContainer.appendChild(postElement);
+                });
+
+                loader.style.display = 'none';
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+            }
+        }
+
+        // Load trending posts on page load
+        fetchTrendingPosts();
     </script>
 </body>
-        </html>
+    </html>
