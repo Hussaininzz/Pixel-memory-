@@ -9,26 +9,30 @@
 </head>
 <body>
     <header>
-        <h1>Toilet Finder</h1>
-        <p>Find clean, safe, and nearby toilets wherever you are!</p>
+        <div class="logo-container">
+            <h1>Toilet Finder</h1>
+            <p>Find clean, safe, and nearby toilets wherever you are!</p>
+        </div>
     </header>
 
-    <main>
+    <section class="search-section">
         <div class="search-container">
             <input type="text" id="location" placeholder="Enter your location..." />
             <button onclick="findToilets()">Find Toilets</button>
         </div>
+    </section>
 
-        <div id="results" class="results-container">
-            <!-- Toilet results will be displayed here -->
-        </div>
-    </main>
+    <section id="results" class="results-container">
+        <!-- Results of toilet search will show here -->
+    </section>
 
     <footer>
-        <p>&copy; 2025 Toilet Finder | Your Toilet Solution!</p>
-        <a href="https://play.google.com" target="_blank">Download the App</a>
+        <div class="footer-content">
+            <p>&copy; 2025 Toilet Finder | A Solution for Clean and Safe Toilets</p>
+            <a href="https://play.google.com" target="_blank">Download the App</a>
+        </div>
     </footer>
 
     <script src="app.js"></script>
 </body>
-</html>
+    </html>
