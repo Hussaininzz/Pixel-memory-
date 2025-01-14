@@ -3,161 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>White Web</title>
-    <style>
-        /* Add your styles here */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            text-align: center;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        header p {
-            color: #555;
-            margin: 5px 0 0;
-        }
-        .search-container {
-            text-align: center;
-            padding: 20px;
-        }
-        .search-container input {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 1em;
-        }
-        .search-container button {
-            padding: 10px 20px;
-            background-color: #4caf50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .search-container button:hover {
-            background-color: #45a049;
-        }
-        .trending {
-            padding: 20px;
-        }
-        .post {
-            background-color: #fff;
-            padding: 10px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .post img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-        .post h3 {
-            margin: 10px 0;
-            font-size: 1.2em;
-        }
-        footer {
-            text-align: center;
-            padding: 10px;
-            background-color: #fff;
-            color: #666;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <meta name="description" content="Find clean and safe public toilets near you.">
+    <title>Toilet Finder</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>White Web</h1>
-        <p>Your gateway to trending posts and discovery.</p>
+        <h1>Toilet Finder</h1>
+        <p>Find clean, safe, and nearby toilets wherever you are!</p>
     </header>
 
-    <div class="search-container">
-        <input type="text" id="search-box" placeholder="Search for posts...">
-        <button onclick="performSearch()">Search</button>
-    </div>
-
-    <div class="trending">
-        <h2>Trending Posts</h2>
-        <div id="posts-container">
-            <!-- Trending posts will be dynamically loaded here -->
+    <main>
+        <div class="search-container">
+            <input type="text" id="location" placeholder="Enter your location..." />
+            <button onclick="findToilets()">Find Toilets</button>
         </div>
-    </div>
+
+        <div id="results" class="results-container">
+            <!-- Toilet results will be displayed here -->
+        </div>
+    </main>
 
     <footer>
-        <p>&copy; 2024 White Web. All rights reserved.</p>
+        <p>&copy; 2025 Toilet Finder | Your Toilet Solution!</p>
+        <a href="https://play.google.com" target="_blank">Download the App</a>
     </footer>
 
-    <script>
-        const YOUTUBE_API_KEY = "YOUR_YOUTUBE_API_KEY"; // Replace with your YouTube API key
-        const GOOGLE_SEARCH_API_KEY = "YOUR_GOOGLE_SEARCH_API_KEY"; // Replace with your Google Search API key
-        const CUSTOM_SEARCH_ENGINE_ID = "YOUR_SEARCH_ENGINE_ID"; // Replace with your Google Custom Search Engine ID
-        const postsContainer = document.getElementById("posts-container");
-
-        // Fetch trending YouTube videos
-        async function fetchTrendingPosts() {
-            try {
-                const response = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=US&maxResults=10&key=${YOUTUBE_API_KEY}`);
-                const data = await response.json();
-
-                data.items.forEach(video => {
-                    const postElement = document.createElement("div");
-                    postElement.className = "post";
-                    postElement.innerHTML = `
-                        <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
-                        <h3>${video.snippet.title}</h3>
-                        <p>${video.snippet.description}</p>
-                    `;
-                    postsContainer.appendChild(postElement);
-                });
-            } catch (error) {
-                console.error("Error fetching trending posts:", error);
-                postsContainer.innerHTML = `<p>Failed to load trending posts. Please try again later.</p>`;
-            }
-        }
-
-        // Perform search using Google Custom Search API
-        async function performSearch() {
-            const query = document.getElementById("search-box").value.trim();
-            if (!query) {
-                alert("Please enter a search query.");
-                return;
-            }
-
-            postsContainer.innerHTML = ""; // Clear previous results
-
-            try {
-                const response = await fetch(`https://www.googleapis.com/customsearch/v1?q=${query}&cx=${CUSTOM_SEARCH_ENGINE_ID}&key=${GOOGLE_SEARCH_API_KEY}`);
-                const data = await response.json();
-
-                data.items.forEach(result => {
-                    const postElement = document.createElement("div");
-                    postElement.className = "post";
-                    postElement.innerHTML = `
-                        <img src="${result.pagemap.cse_image ? result.pagemap.cse_image[0].src : ''}" alt="${result.title}">
-                        <h3>${result.title}</h3>
-                        <p>${result.snippet}</p>
-                    `;
-                    postsContainer.appendChild(postElement);
-                });
-            } catch (error) {
-                console.error("Error performing search:", error);
-                postsContainer.innerHTML = `<p>Failed to perform search. Please try again later.</p>`;
-            }
-        }
-
-        // Load trending posts on page load
-        fetchTrendingPosts();
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
