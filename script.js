@@ -1,4 +1,4 @@
-// Sample data for toilets (you would normally pull this from a real database or API)
+// Sample data for toilets (this can be dynamically fetched from a database or API)
 const toilets = [
     { name: "Public Toilet A", location: "Ernakulam, Kerala", address: "Street 1, Ernakulam" },
     { name: "Public Toilet B", location: "Kochi, Kerala", address: "Street 2, Kochi" },
