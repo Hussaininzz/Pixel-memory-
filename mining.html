@@ -6,24 +6,40 @@
     <title>Mining Section</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 10%;
-            background: #000428;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        p {
+            font-size: 1.2em;
+            margin: 20px 0;
         }
         button {
             padding: 10px 20px;
-            background: #00ffcc;
+            font-size: 1em;
+            background: #ff6f00;
+            color: white;
             border: none;
-            color: black;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ffa726;
         }
     </style>
 </head>
 <body>
-    <h1>Mining Section</h1>
+    <h1>Mining Dashboard</h1>
     <p>Status: <strong>Mining Not Started</strong></p>
     <button onclick="startMining()">Start Mining</button>
 
