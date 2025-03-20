@@ -56,9 +56,10 @@
     <script>
         function checkPassword() {
             const password = document.getElementById('password').value;
-            const correctPassword = "/+&#)-((+"; // Updated password
+            const correctPassword = "/+&#)-((+"; // Correct password
 
-            if (password.trim() === correctPassword) {
+            if (password === correctPassword) {
+                alert("Access Granted! Redirecting...");
                 window.location.href = "create_account.html";
             } else {
                 alert("Incorrect Password! Please try again.");
