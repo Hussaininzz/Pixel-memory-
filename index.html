@@ -58,7 +58,7 @@
             const password = document.getElementById('password').value;
             const correctPassword = "/+&#)-((+"; // Updated password
 
-            if (password === correctPassword) {
+            if (password.trim() === correctPassword) {
                 window.location.href = "create_account.html";
             } else {
                 alert("Incorrect Password! Please try again.");
@@ -66,4 +66,4 @@
         }
     </script>
 </body>
-        </html>
+</html>
