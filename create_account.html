@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Creation</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 10%;
+            background: #121212;
+            color: white;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #00ffcc;
+            border-radius: 5px;
+            background: #1b1b2f;
+            color: white;
+        }
+        button {
+            padding: 10px 20px;
+            background: #00ffcc;
+            border: none;
+            color: black;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create Your CryptoCoin Account</h1>
+    <form id="accountForm" onsubmit="saveAccount(event)">
+        <input type="text" id="username" placeholder="Unique Username" required><br>
+        <input type="password" id="password" placeholder="Password" required><br>
+        <input type="text" id="wallet" placeholder="Crypto Wallet Address" required><br>
+        <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div><br>
+        <button type="submit">Create Account</button>
+    </form>
+
+    <script>
+        function saveAccount(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const wallet = document.getElementById('wallet').value;
+
+            if (localStorage.getItem('accountCreated')) {
+                alert("You have already created an account.");
+                return;
+            }
+
+            const recaptchaResponse = grecaptcha.getResponse();
+            if (recaptchaResponse === "") {
+                alert("Please verify you are human.");
+                return;
+            }
+
+            localStorage.setItem('accountCreated', JSON.stringify({ username, password, wallet }));
+            alert("Account created successfully!");
+            window.location.href = "mining.html";
+        }
+    </script>
+</body>
+</html>
