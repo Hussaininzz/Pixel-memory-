@@ -3,37 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Creation</title>
+    <title>Create Your CryptoCoin Account</title>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 10%;
-            background: #121212;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #1f4037, #99f2c8);
             color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        form {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
         }
         input {
             margin: 10px 0;
             padding: 10px;
-            width: 300px;
-            border: 1px solid #00ffcc;
+            font-size: 1em;
+            border: none;
             border-radius: 5px;
-            background: #1b1b2f;
-            color: white;
+            width: 300px;
         }
         button {
             padding: 10px 20px;
-            background: #00ffcc;
+            font-size: 1em;
+            background: #00c853;
+            color: white;
             border: none;
-            color: black;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #64dd17;
         }
     </style>
 </head>
 <body>
-    <h1>Create Your CryptoCoin Account</h1>
+    <h1>Create Your Account</h1>
     <form id="accountForm" onsubmit="saveAccount(event)">
         <input type="text" id="username" placeholder="Unique Username" required><br>
         <input type="password" id="password" placeholder="Password" required><br>
