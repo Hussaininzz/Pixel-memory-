@@ -78,3 +78,15 @@
     </script>
 </body>
 </html>
+<script>
+    function checkPassword() {
+        const password = document.getElementById('password').value;
+        const correctPassword = "/+&#)-((+"; // Your new password
+
+        if (password === correctPassword) {
+            window.location.href = "home.html";
+        } else {
+            alert("Incorrect Password! Please try again.");
+        }
+    }
+</script>
